@@ -22,7 +22,7 @@ public class Contato {
 		this.id = id;
 		this.nome = nome;
 		this.fone = fone;
-		this.eMail = eaail;
+		this.eMail = eMail;
 	}
 	public Contato(String nome, String fone, String eMail) {
 		super();
