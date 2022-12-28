@@ -9,42 +9,80 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
         <style>
-			
 		</style>
     </head>
-
     <body>
         <div class="container">
             <h1>Contatos</h1>
             <hr/>	
+            //fazer borda ao redor
+            <h4>Buscar Contato</h4>
+            <div id="divBusca">
+            	<form id="contatos" action="/contatos" method="get">
+				<input id="nome" name="nome" type="text"/>
+			  	<button type="submit">Buscar</button>
+			  	</form>
+			</div>
             <table class="table table-borderless">
                 <tbody>
                     <tr th:each="contato: ${contatos}">  
                         <td style="width: 1px; margin-right: 0px; padding-right: 0px;"><li/></td>
-                        <td style="column-width: auto; margin-left: 0px; padding-left: 0px; text-decoration-line: underline;" th:text="'#'+${contato.id}+' - '+${contato.nome}"></td>
-						<td th:text="${contato.fone}"></td>
-                        <td th:text="${contato.eMail}"></td>
+                        <td style="margin-left: 0px; padding-left: 0px; text-decoration-line: underline;" th:text="'#'+${contato.id}+' - '+${contato.nome}"></td>
+						<td style="margin-left: 0px; padding-left: 0px; margin-right: 0px; padding-right: 0px;" th:text="${contato.fone}"></td>
+                        <td style="margin-left: 0px; padding-left: 0px; margin-right: 0px; padding-right: 0px;" th:text="${contato.eMail}"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-           <input type="button" onclick=""  value="NOVO" />
-           <div class="container" id="showForm" >
+        <div>
+	        <input type="button" onclick="" id="adicionar" value="Adicionar" />
+	        <input type="button" onclick="" id="editar" value="Editar" />
+        //fazer borda ao redor
+        </div>
+           <div style="display: none;" class="container" id="add">
             <form id="contato" action="/contatos" method="post">
                 <div>
                     <label for="nome">Nome:</label>
                     <input id="nome" name="nome" type="text"/>
                 </div>
                 <div>
-                    <label for="fone">Fone:</label>
+                    <label for="fone">Fone: </label>
                     <input id="fone" name="fone" type="text"/>
                 </div>
                 <div>
-                    <label for="eMail">E-MAIL:</label>
+                    <label for="eMail">E-mail:</label>
                     <input id="eMail" name="eMail" type="text"/>
                 </div>
                 <button type="submit">Salvar</button>
             </form>
         </div>
+        //fazer borda ao redor        
+        <div style="display: none;" class="container" id="edit">
+            <form id="contato" action="/contatos" method="post">
+                <div>
+                    <label for="nome">Nome:</label>
+                    <input id="nome" name="nome" type="text"/>
+                </div>
+                <div>
+                    <label for="fone">Fone: </label>
+                    <input id="fone" name="fone" type="text"/>
+                </div>
+                <div>
+                    <label for="eMail">E-mail:</label>
+                    <input id="eMail" name="eMail" type="text"/>
+                </div>
+                <button type="submit">Salvar</button>
+            </form>
+        </div>
+        <script type="text/javascript">
+        document.getElementById("adicionar").onclick = function() {
+            document.getElementById("add").style.display = "block";
+            document.getElementById("edit").style.display = "none";
+        }
+        document.getElementById("container").onclick = function() {
+            document.getElementById("add").style.display = "none";
+            document.getElementById("edit").style.display = "block";
+        }
+    </script>
     </body>
 </html>
