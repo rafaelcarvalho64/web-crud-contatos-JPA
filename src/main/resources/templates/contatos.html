@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Listagem de contatos utilizando o Spring Boot</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <style>
+			
+		</style>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Contatos</h1>
+            <hr/>	
+            <table class="table table-borderless">
+                <tbody>
+                    <tr th:each="contato: ${contatos}">  
+                        <td style="width: 1px; margin-right: 0px; padding-right: 0px;"><li/></td>
+                        <td style="column-width: auto; margin-left: 0px; padding-left: 0px; text-decoration-line: underline;" th:text="'#'+${contato.id}+' - '+${contato.nome}"></td>
+						<td th:text="${contato.fone}"></td>
+                        <td th:text="${contato.eMail}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+           <input type="button" onclick=""  value="NOVO" />
+           <div class="container" id="showForm" >
+            <form id="contato" action="/contatos" method="post">
+                <div>
+                    <label for="nome">Nome:</label>
+                    <input id="nome" name="nome" type="text"/>
+                </div>
+                <div>
+                    <label for="fone">Fone:</label>
+                    <input id="fone" name="fone" type="text"/>
+                </div>
+                <div>
+                    <label for="eMail">E-MAIL:</label>
+                    <input id="eMail" name="eMail" type="text"/>
+                </div>
+                <button type="submit">Salvar</button>
+            </form>
+        </div>
+    </body>
+</html>
