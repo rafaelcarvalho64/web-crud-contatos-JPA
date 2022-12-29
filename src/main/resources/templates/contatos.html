@@ -15,31 +15,39 @@
         <div class="container">
             <h1>Contatos</h1>
             <hr/>	
-            //fazer borda ao redor
             <h4>Buscar Contato</h4>
             <div id="divBusca">
             	<form id="contatos" action="/contatos" method="get">
-				<input id="nome" name="nome" type="text"/>
-			  	<button type="submit">Buscar</button>
+					<input id="nome" name="nome" type="text"/>
+				  	<button type="submit">Buscar</button>
 			  	</form>
 			</div>
             <table class="table table-borderless">
                 <tbody>
+                <hr/>
                     <tr th:each="contato: ${contatos}">  
                         <td style="width: 1px; margin-right: 0px; padding-right: 0px;"><li/></td>
                         <td style="margin-left: 0px; padding-left: 0px; text-decoration-line: underline;" th:text="'#'+${contato.id}+' - '+${contato.nome}"></td>
 						<td style="margin-left: 0px; padding-left: 0px; margin-right: 0px; padding-right: 0px;" th:text="${contato.fone}"></td>
-                        <td style="margin-left: 0px; padding-left: 0px; margin-right: 0px; padding-right: 0px;" th:text="${contato.eMail}"></td>
+                        <td style="margin-left: 0px; padding-left: 0px; margin-right: 0px; padding-right: 0px;" th:text="${contato.email}"></td>
+                    	<td> 
+	                    	<form id="contatosdel" action="/contatos/delete" method="get">
+								<textarea style="display: none;" id="id" name="id" th:text="${contato.id}"></textarea>
+							  	<button type="submit">Deletar</button>
+			  				</form>
+                    	</td>			
                     </tr>
                 </tbody>
             </table>
+            <hr/>
         </div>
-        <div>
-	        <input type="button" onclick="" id="adicionar" value="Adicionar" />
-	        <input type="button" onclick="" id="editar" value="Editar" />
-        //fazer borda ao redor
+        <div class="container">
+	        <input type="button" id="adicionar" value="Adicionar" />
+	        <input type="button" id="editar" value="Editar" />
         </div>
            <div style="display: none;" class="container" id="add">
+           <br/>
+            <h4>Adicionar Contato</h4>
             <form id="contato" action="/contatos" method="post">
                 <div>
                     <label for="nome">Nome:</label>
@@ -50,15 +58,20 @@
                     <input id="fone" name="fone" type="text"/>
                 </div>
                 <div>
-                    <label for="eMail">E-mail:</label>
-                    <input id="eMail" name="eMail" type="text"/>
+                    <label for="email">E-mail:</label>
+                    <input id="email" name="email" type="text"/>
                 </div>
                 <button type="submit">Salvar</button>
             </form>
         </div>
-        //fazer borda ao redor        
         <div style="display: none;" class="container" id="edit">
-            <form id="contato" action="/contatos" method="post">
+        <br/>
+         <h4>Editar Contato</h4>
+            <form id="contato" action="/contatos/update" method="get">
+                <div>
+                    <label for="id">Id:</label>
+                    <input id="id" name="id" type="number"/>
+                </div>
                 <div>
                     <label for="nome">Nome:</label>
                     <input id="nome" name="nome" type="text"/>
@@ -68,8 +81,8 @@
                     <input id="fone" name="fone" type="text"/>
                 </div>
                 <div>
-                    <label for="eMail">E-mail:</label>
-                    <input id="eMail" name="eMail" type="text"/>
+                    <label for="email">E-mail:</label>
+                    <input id="email" name="email" type="text"/>
                 </div>
                 <button type="submit">Salvar</button>
             </form>
@@ -79,7 +92,7 @@
             document.getElementById("add").style.display = "block";
             document.getElementById("edit").style.display = "none";
         }
-        document.getElementById("container").onclick = function() {
+        document.getElementById("editar").onclick = function() {
             document.getElementById("add").style.display = "none";
             document.getElementById("edit").style.display = "block";
         }

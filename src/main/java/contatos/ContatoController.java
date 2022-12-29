@@ -19,37 +19,50 @@ public class ContatoController {
 
 	@GetMapping("/contatos")
 	public ModelAndView getAllContatos(String nome) {
-		if (nome != null && nome != "") {
-			List<Contato> lista = repository.findByNome(nome);
-			ModelAndView modelAndView = new ModelAndView("contatos.html");
-	        modelAndView.addObject("contatos", lista);
-	        return modelAndView;
-		}else {
-			List<Contato> lista = repository.findAll();
-			ModelAndView modelAndView = new ModelAndView("contatos.html");
-	        modelAndView.addObject("contatos", lista);
-	        return modelAndView;
-		}
+		ModelAndView modelAndView = new ModelAndView("contatos.html");
+		try {
+			if (nome != null && nome != "") {
+				List<Contato> lista = repository.findByNome(nome);
+				try {
+					Optional<Contato> data = repository.findById(Long.parseLong(nome));
+			    	Contato a = data.get();
+			    	lista.add(a);
+				} catch (Exception e) {}
+		        modelAndView.addObject("contatos", lista);
+			}else {
+				List<Contato> lista = repository.findAll();
+		        modelAndView.addObject("contatos", lista);
+			}
+		} catch (Exception e) {}
+		return modelAndView;
 	}
 	
 	@PostMapping("/contatos")
 	public RedirectView saveContato(Contato contato) {
-		  repository.save(contato);
+		  try {
+			  repository.save(contato);
+		} catch (Exception e) {}
 		  return new RedirectView("/contatos", true);
 	}
-
-	@DeleteMapping("/contato/{id}")
-	public void deleteContato(@PathVariable Long id) {
-		repository.deleteById(id);
-	}
 	    
-	@PutMapping("/contato/{id}")
-	public Contato updateAluno(@PathVariable long id, @RequestBody Contato contato) {
-		Optional<Contato> data = repository.findById(id);
+	@GetMapping("/contatos/update")
+	public RedirectView updateContato(Contato contato) {
+		try {
+			Optional<Contato> data = repository.findById(contato.getId());
 	    	Contato a = data.get();
-	      a.setNome(contato.getNome());
-	      a.setFone(contato.getFone());
-	      a.setEMail(contato.getEMail());
-	      return repository.save(a);	   
+		      a.setNome(contato.getNome());
+		      a.setFone(contato.getFone());
+		      a.setEmail(contato.getEmail());
+		      repository.save(a);	
+		} catch (Exception e) {}
+	      return new RedirectView("/contatos", true);
 	}
+	
+	@GetMapping("/contatos/delete")
+	public RedirectView deleteContato(Contato contato) {
+		try {
+			repository.deleteById(contato.getId());
+		} catch (Exception e) {}
+		return new RedirectView("/contatos", true);
+	}	
 }

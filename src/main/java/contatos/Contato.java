@@ -12,23 +12,23 @@ public class Contato {
 	private Long id;
     private String nome;
     private String fone;
-    private String eMail;
+    private String email;
     
 	public Contato() {
 		super();
 	}
-	public Contato(Long id, String nome, String fone, String eMail) {
+	public Contato(Long id, String nome, String fone, String email) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.fone = fone;
-		this.eMail = eMail;
+		this.email = email;
 	}
-	public Contato(String nome, String fone, String eMail) {
+	public Contato(String nome, String fone, String email) {
 		super();
 		this.nome = nome;
 		this.fone = fone;
-		this.eMail = eMail;
+		this.email = email;
 	}
 	public Long getId() {
 		return id;
@@ -48,10 +48,10 @@ public class Contato {
 	public void setFone(String fone) {
 		this.fone = fone;
 	}
-	public String getEMail() {
-		return eMail;
+	public String getEmail() {
+		return email;
 	}
-	public void setEMail(String eMail) {
-		this.eMail = eMail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
