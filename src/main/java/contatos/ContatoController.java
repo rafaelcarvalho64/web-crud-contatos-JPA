@@ -33,7 +33,9 @@ public class ContatoController {
 				List<Contato> lista = repository.findAll();
 		        modelAndView.addObject("contatos", lista);
 			}
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		return modelAndView;
 	}
 	
