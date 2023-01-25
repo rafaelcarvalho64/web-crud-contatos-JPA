@@ -1,16 +1,4 @@
-# Aplicação web para realizar o CRUD de contatos com JPA 
-
-Instituto Federal do pará
-
-Análise e Desenvolvimento de Sistemas
-
-Professor CLAUDIO ROBERTO DE LIMA MARTINS
-
-Discentes:
-
-RAFAEL AUGUSTO BARBOSA DE CARVALHO - 20200795605
-
-ISRAEL PANTOJA PEREIRA DE CARVALHO - 20200795035
+# Aplicação web java para realizar o CRUD de contatos com JPA 
 
 Instruções da atividade:
 
